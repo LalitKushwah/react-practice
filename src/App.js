@@ -4,43 +4,16 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ADD_ITEM } from "./actions";
-export const App = ({ articles, addArticle }) => {
-  const [second, setSecond] = useState(0);
-  const [minute, setMinute] = useState(0);
-  console.log("====== Articles from state ====", articles);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const nextSecond = second + 1;
-      if (nextSecond > 60) {
-        setSecond(0);
-        // need to handle scenario when minute = 60;
-        setMinute((minute) => minute + 1);
-      } else {
-        setSecond((second) => second + 1);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  });
+import { useLocalStorage } from "./useLocalStorage";
+export const App = () => {
+  const [value, setValue] = useLocalStorage("name", "");
 
   return (
     <div className="App">
-      <h1>
-        {minute}:{second}
-        <button onClick={() => addArticle({ title: "Test Item", price: 100 })}>
-          Add Item
-        </button>
-      </h1>
-      <h2>{JSON.stringify(articles)}</h2>
+      <div className="control">
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+      </div>
     </div>
   );
 };
-
-const mapStateToProps = (state) => ({
-  articles: state.articles,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addArticle: (data) => dispatch({ type: "ADD_ITEM", payload: data }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
