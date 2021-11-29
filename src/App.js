@@ -14,7 +14,6 @@ export const App = () => {
       const second = time.getSeconds();
       const minute = time.getMinutes();
       const hour = time.getHours();
-      console.log("==== hour ===", hour);
       const secondDeg = (second / 60) * 360 + 90;
       const minuteDeg = (minute / 60) * 360 + 90;
       const hourDeg = (hour / 12) * 360 + 90;
