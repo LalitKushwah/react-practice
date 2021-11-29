@@ -1,12 +1,29 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
+
+const initialState = {
+  secondDeg: 90,
+  minuteDeg: 90,
+  hourDeg: 90,
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_SECOND_DEG":
+      return { ...state, secondDeg: action.secondDeg };
+    case "SET_MINUTE_DEG":
+      return { ...state, minDeg: action.minuteDeg };
+    case "SET_HOUR_DEG":
+      return { ...state, hourDeg: action.hourDeg };
+    default:
+      return state;
+  }
+};
 
 export const App = () => {
-  const [secDeg, setSecDeg] = useState();
-  const [minDeg, setMinDeg] = useState();
-  const [hourDeg, setHourDeg] = useState();
+  const [state, dispatch] = useReducer(reducer);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,27 +34,27 @@ export const App = () => {
       const secondDeg = (second / 60) * 360 + 90;
       const minuteDeg = (minute / 60) * 360 + 90;
       const hourDeg = (hour / 12) * 360 + 90;
-      setSecDeg(secondDeg);
-      setMinDeg(minuteDeg);
-      setHourDeg(hourDeg);
+      dispatch({ type: "SET_SECOND_DEG", secondDeg });
+      dispatch({ type: "SET_MINUTE_DEG", minuteDeg });
+      dispatch({ type: "SET_HOUR_DEG", hourDeg });
     }, 1000);
     return () => clearInterval(interval);
-  }, [secDeg, minDeg]);
+  }, [state.secondDeg, state.minuteDeg]);
 
   return (
     <div className="clock">
       <div className="clock-face">
         <div
           className="hand second-hand"
-          style={{ transform: `rotate(${secDeg}deg)` }}
+          style={{ transform: `rotate(${state.secondDeg}deg)` }}
         ></div>
         <div
           className="hand minute-hand"
-          style={{ transform: `rotate(${minDeg}deg)` }}
+          style={{ transform: `rotate(${state.minuteDeg}deg)` }}
         ></div>
         <div
           className="hand hour-hand"
-          style={{ transform: `rotate(${hourDeg}deg)` }}
+          style={{ transform: `rotate(${state.hourDeg}deg)` }}
         ></div>
       </div>
     </div>
