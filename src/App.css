@@ -10,12 +10,12 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transform: translateY(-10px);
+  transform: translateY(-3px);
 }
 .hand {
   width: 50%;
   height: 2px;
-  background: crimson;
+  background: cyan;
   position: absolute;
   transform-origin: 100%;
   top: 50%;

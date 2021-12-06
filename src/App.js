@@ -14,17 +14,16 @@ const reducer = (state = initialState, action) => {
     case "SET_SECOND_DEG":
       return { ...state, secondDeg: action.secondDeg };
     case "SET_MINUTE_DEG":
-      return { ...state, minDeg: action.minuteDeg };
+      return { ...state, minuteDeg: action.minuteDeg };
     case "SET_HOUR_DEG":
       return { ...state, hourDeg: action.hourDeg };
-    default:
-      return state;
   }
+  return state;
 };
 
 export const App = () => {
-  const [state, dispatch] = useReducer(reducer);
-
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
   useEffect(() => {
     const interval = setInterval(() => {
       const time = new Date();
