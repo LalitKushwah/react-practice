@@ -7,7 +7,6 @@ import { ADD_ITEM } from "./actions";
 export const App = ({ articles, addArticle }) => {
   const [second, setSecond] = useState(0);
   const [minute, setMinute] = useState(0);
-  console.log("====== Articles from state ====", articles);
   useEffect(() => {
     const interval = setInterval(() => {
       const nextSecond = second + 1;
@@ -24,12 +23,16 @@ export const App = ({ articles, addArticle }) => {
 
   return (
     <div className="App">
-      <h1>
-        {minute}:{second}
+      <div>
+        <h1>
+          {minute}:{second}
+        </h1>
+      </div>
+      <div>
         <button onClick={() => addArticle({ title: "Test Item", price: 100 })}>
           Add Item
         </button>
-      </h1>
+      </div>
       <h2>{JSON.stringify(articles)}</h2>
     </div>
   );

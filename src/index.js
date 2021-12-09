@@ -5,11 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store";
 import { Provider } from "react-redux";
+import ReactQuery from "./react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <ReactQuery />
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
