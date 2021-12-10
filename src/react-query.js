@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
+import "./App.css";
 
 const ReactQuery = () => {
   const fetchPokemon = async () => {
@@ -12,9 +13,9 @@ const ReactQuery = () => {
   if (loading) return <p>Loading</p>;
   if (error) return <p>Error while fetching</p>;
   return (
-    <div>
+    <div className="container">
       {data?.map((item) => (
-        <div key={item.name}>
+        <div key={item.name} className="item">
           <p>{item.name}</p>
         </div>
       ))}
